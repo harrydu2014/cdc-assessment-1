@@ -14,6 +14,7 @@ class CryptoListViewController: UIViewController {
     private let loadButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Load Crypto", for: .normal)
+        button.setTitleColor(UIColor(red: 24/255.0, green: 98/255.0, blue: 182/255.0, alpha: 1.0), for: .normal) 
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -48,7 +49,7 @@ class CryptoListViewController: UIViewController {
             
             cryptoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             cryptoImageView.bottomAnchor.constraint(equalTo: loadButton.topAnchor, constant: -20),
-            cryptoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            cryptoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
             cryptoImageView.heightAnchor.constraint(equalTo: cryptoImageView.widthAnchor, multiplier: 0.5),
             
             loadButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
