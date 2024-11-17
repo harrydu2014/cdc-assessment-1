@@ -7,11 +7,9 @@
 
 import UIKit
 
-import UIKit
-
 class CryptoListViewController: UIViewController {
 
-    private var cryptoModels: [CryptoModel] = [] // Holds your crypto data
+    private var cryptoModels: [CryptoModel] = []
     
     private let loadButton: UIButton = {
         let button = UIButton(type: .system)
@@ -19,6 +17,13 @@ class CryptoListViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private let cryptoImageView: UIImageView = {
+       let imageView = UIImageView()
+       imageView.translatesAutoresizingMaskIntoConstraints = false
+       imageView.contentMode = .scaleAspectFit
+       return imageView
+   }()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -30,15 +35,22 @@ class CryptoListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupLayout()
-        
+        cryptoImageView.image = UIImage(named: "Crypto")
         loadButton.addTarget(self, action: #selector(loadCrypto), for: .touchUpInside)
     }
     
     private func setupLayout() {
+        view.addSubview(cryptoImageView)
         view.addSubview(loadButton)
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
+            
+            cryptoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            cryptoImageView.bottomAnchor.constraint(equalTo: loadButton.topAnchor, constant: -20),
+            cryptoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            cryptoImageView.heightAnchor.constraint(equalTo: cryptoImageView.widthAnchor, multiplier: 0.5),
+            
             loadButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             loadButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             loadButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
@@ -53,7 +65,7 @@ class CryptoListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CryptoCell")
-        tableView.isHidden = true // Hide table until data is loaded
+        tableView.isHidden = true
     }
 
     @objc private func loadCrypto() {
@@ -68,7 +80,7 @@ class CryptoListViewController: UIViewController {
             cryptoModels = try decoder.decode([CryptoModel].self, from: data)
             tableView.reloadData()
             loadButton.isHidden = !cryptoModels.isEmpty
-            tableView.isHidden = cryptoModels.isEmpty // Hide if no data
+            tableView.isHidden = cryptoModels.isEmpty
         } catch {
             showErrorAlert()
         }

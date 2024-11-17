@@ -10,6 +10,6 @@ import UIKit
 class CryptoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white // Just for visibility
+        view.backgroundColor = .white
     }
 }
