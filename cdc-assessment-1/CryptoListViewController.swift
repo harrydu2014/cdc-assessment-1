@@ -14,7 +14,7 @@ class CryptoListViewController: UIViewController {
     private let loadButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Load Crypto", for: .normal)
-        button.setTitleColor(UIColor(red: 24/255.0, green: 98/255.0, blue: 182/255.0, alpha: 1.0), for: .normal) 
+        button.setTitleColor(UIColor(red: 24/255.0, green: 98/255.0, blue: 182/255.0, alpha: 1.0), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
